@@ -8,8 +8,8 @@
 ---
 
 ![Logo](https://i.imgur.com/GEyZoJV.png)
-<p align="center"><h2>Create complex menu systems and beautiful GUIs in Minecraft with easy.</h2></p>
 
+Create complex menu systems and beautiful GUIs in Minecraft with ease.
 Designer uses [Remain](https://github.com/kangarko/Remain) to maintain the perfect cross-version Minecraft compatibility.
 
 ## Installation
