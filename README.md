@@ -31,7 +31,7 @@ We use Maven to compile. See below for a step-by-step tutorial.
 <dependency>
 	<groupId>com.github.kangarko</groupId>
 	<artifactId>Designer</artifactId>
-	<version>2.0.0</version> <!-- change to the latest version -->
+	<version>3.0.0</version> <!-- change to the latest version -->
 	<scope>compile</scope>
 </dependency>
  ```
