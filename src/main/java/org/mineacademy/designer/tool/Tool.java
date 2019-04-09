@@ -4,12 +4,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.mineacademy.designer.model.ItemCreator;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 
 /**
- * Represents a tool. A tool is a simple ItemStack
- * that is registered within the plugin and fires
- * automatic events
+ * Represents a tool. A tool is a simple ItemStack that is registered within the
+ * plugin and fires automatic events
  */
 public abstract class Tool {
 
@@ -53,7 +52,8 @@ public abstract class Tool {
 	public abstract void onBlockClick(PlayerInteractEvent event);
 
 	/**
-	 * Called when the player swap items in their hotbar and the new slot matches this tool.
+	 * Called when the player swap items in their hotbar and the new slot matches
+	 * this tool.
 	 *
 	 * @param player the player
 	 */
@@ -75,11 +75,12 @@ public abstract class Tool {
 	 * @return true if this tool is the given itemstack
 	 */
 	public boolean isTool(ItemStack item) {
-		return CompatUtils.isSimilar(getItem(), item);
+		return RemainUtils.isSimilar(getItem(), item);
 	}
 
 	/**
-	 * Should we fire {@link #onBlockClick(PlayerInteractEvent)} even on cancelled events?
+	 * Should we fire {@link #onBlockClick(PlayerInteractEvent)} even on cancelled
+	 * events?
 	 *
 	 * True by default. Set to false if you want to catch clicking air.
 	 *
@@ -90,10 +91,11 @@ public abstract class Tool {
 	}
 
 	/**
-	 * A convenience method, should we automatically cancel the {@link PlayerInteractEvent} ?
+	 * A convenience method, should we automatically cancel the
+	 * {@link PlayerInteractEvent} ?
 	 *
-	 * @return true if the interact event should be cancelled automatically
-	 * 		   false by default
+	 * @return true if the interact event should be cancelled automatically false by
+	 *         default
 	 */
 	public boolean autoCancel() {
 		return false;
@@ -101,6 +103,6 @@ public abstract class Tool {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof Tool && ((Tool)obj).getItem().equals(getItem());
+		return obj instanceof Tool && ((Tool) obj).getItem().equals(getItem());
 	}
 }

@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 
 import lombok.Getter;
 
@@ -108,7 +108,7 @@ public final class InventoryDrawer implements ItemSetter {
 	 * @param player the player
 	 */
 	public final void display(Player player) {
-		final Inventory inv = Bukkit.createInventory(player, size, CompatUtils.colorize(title));
+		final Inventory inv = Bukkit.createInventory(player, size, RemainUtils.colorize(title));
 		inv.setContents(content);
 
 		if (player.getOpenInventory() != null)

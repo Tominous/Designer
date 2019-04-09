@@ -6,7 +6,7 @@ import java.util.List;
 import org.mineacademy.designer.button.Button;
 import org.mineacademy.designer.menu.Menu;
 import org.mineacademy.designer.model.InventoryDrawer;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 
 /**
  *  An incremental menu that list items.
@@ -22,7 +22,7 @@ public abstract class MenuList extends MenuStandard {
 	protected MenuList(Menu parent, String listName, Iterable<String> list) {
 		super(parent);
 
-		this.list = CompatUtils.toList(list);
+		this.list = RemainUtils.toList(list);
 
 		setSize(18 + (9 * (this.list.size() / 9)));
 		setTitle(listName + " Menu");

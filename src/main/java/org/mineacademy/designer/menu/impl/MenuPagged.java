@@ -14,7 +14,7 @@ import org.mineacademy.designer.model.ItemCreator;
 import org.mineacademy.designer.model.PageManager;
 import org.mineacademy.remain.model.CompMaterial;
 import org.mineacademy.remain.model.CompSound;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 import org.mineacademy.remain.util.ReflectionUtil;
 
 import lombok.Getter;
@@ -98,7 +98,7 @@ public abstract class MenuPagged<T> extends MenuStandard {
 				@Override
 				public void onClickedInMenu(Player pl, Menu menu, ClickType click) {
 					if (canGo) {
-						MenuPagged.this.currentPage = CompatUtils.range(currentPage - 1, 1, pages.size());
+						MenuPagged.this.currentPage = RemainUtils.range(currentPage - 1, 1, pages.size());
 
 						updatePage();
 					}
@@ -118,7 +118,7 @@ public abstract class MenuPagged<T> extends MenuStandard {
 				@Override
 				public void onClickedInMenu(Player pl, Menu menu, ClickType click) {
 					if (canGo) {
-						MenuPagged.this.currentPage = CompatUtils.range(currentPage + 1, 1, pages.size());
+						MenuPagged.this.currentPage = RemainUtils.range(currentPage + 1, 1, pages.size());
 
 						updatePage();
 					}

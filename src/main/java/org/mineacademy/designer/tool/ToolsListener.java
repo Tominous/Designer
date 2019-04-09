@@ -18,7 +18,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.mineacademy.designer.tool.impl.Rocket;
 import org.mineacademy.remain.Remain;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 
 import lombok.Data;
 
@@ -46,8 +46,8 @@ public final class ToolsListener implements Listener {
 	 *
 	 * @param event the event
 	 */
-	@EventHandler(priority=EventPriority.HIGHEST)
-	public final void onRocketShoot(ProjectileLaunchEvent event) {
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onRocketShoot(ProjectileLaunchEvent event) {
 		final Projectile shot = event.getEntity();
 		final Object /* 1.6.4 Comp */ shooter = shot.getShooter();
 
@@ -77,9 +77,9 @@ public final class ToolsListener implements Listener {
 					final World world = shot.getWorld();
 					final Location loc = shot.getLocation();
 
-					CompatUtils.runDelayed(0, () -> shot.remove());
+					RemainUtils.runDelayed(0, () -> shot.remove());
 
-					CompatUtils.runDelayed(1, () -> {
+					RemainUtils.runDelayed(1, () -> {
 						Objects.requireNonNull(shot, "shot = null");
 						Objects.requireNonNull(world, "shot.world = null");
 						Objects.requireNonNull(loc, "shot.location = null");
@@ -99,7 +99,7 @@ public final class ToolsListener implements Listener {
 				}
 
 			} catch (final Throwable t) {
-				CompatUtils.tell(player, "&cOups! There was a problem with this projectile! Please contact the administrator to review the console for details.");
+				RemainUtils.tell(player, "&cOups! There was a problem with this projectile! Please contact the administrator to review the console for details.");
 
 				event.setCancelled(true);
 				t.printStackTrace();
@@ -111,7 +111,7 @@ public final class ToolsListener implements Listener {
 	 *
 	 * @param event
 	 */
-	@EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onRocketHit(ProjectileHitEvent event) {
 		final Projectile proj = event.getEntity();
 		final ShotRocket rocket = shotRockets.remove(proj.getUniqueId());
@@ -123,30 +123,30 @@ public final class ToolsListener implements Listener {
 	/**
 	 * Handles clicking tools
 	 *
-	 * @param events
+	 * @param event
 	 */
-	@EventHandler(priority=EventPriority.HIGHEST)
-	public final void onToolClick(PlayerInteractEvent events) {
-		if (!Remain.isInteractEventPrimaryHand(events))
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onToolClick(PlayerInteractEvent event) {
+		if (!Remain.isInteractEventPrimaryHand(event))
 			return;
 
-		final Player player = events.getPlayer();
+		final Player player = event.getPlayer();
 		final Tool tool = ToolRegistry.getTool(player.getItemInHand());
 
 		if (tool != null)
 			try {
-				if ((events.isCancelled() || !events.hasBlock()) && tool.ignoreCancelled())
+				if ((event.isCancelled() || !event.hasBlock()) && tool.ignoreCancelled())
 					return;
 
-				tool.onBlockClick(events);
+				tool.onBlockClick(event);
 
 				if (tool.autoCancel())
-					events.setCancelled(true);
+					event.setCancelled(true);
 
 			} catch (final Throwable t) {
-				CompatUtils.tell(player, "&cOups! There was a problem with this tool! Please contact the administrator to review the console for details.");
+				RemainUtils.tell(player, "&cOups! There was a problem with this tool! Please contact the administrator to review the console for details.");
 
-				events.setCancelled(true);
+				event.setCancelled(true);
 				t.printStackTrace();
 			}
 	}

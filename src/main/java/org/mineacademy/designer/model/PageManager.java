@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 
 import lombok.Getter;
 
@@ -36,7 +36,7 @@ public class PageManager<T> {
 	 */
 	private PageManager(int cellSize, Iterable<T> allItems) {
 		this.cellSize = cellSize;
-		this.pages = fillPages(CompatUtils.toList(allItems));
+		this.pages = fillPages(RemainUtils.toList(allItems));
 	}
 
 	/**

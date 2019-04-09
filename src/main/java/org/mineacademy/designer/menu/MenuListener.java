@@ -14,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.mineacademy.designer.button.Button;
 import org.mineacademy.designer.model.UIClickLocation;
 import org.mineacademy.remain.Remain;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 
 /**
  * The bukkit listener responsible for menus to function.
@@ -75,10 +75,10 @@ public final class MenuListener implements Listener {
 							menu.onMenuClick(player, event.getSlot(), action, event.getClick(), cursor, slotItem, !allowed);
 
 					} catch (final Throwable t) {
-						CompatUtils.tell(player, "&cOups! There was a problem with this menu! Please contact the administrator to review the console for details.");
+						RemainUtils.tell(player, "&cOups! There was a problem with this menu! Please contact the administrator to review the console for details.");
 						player.closeInventory();
 
-						CompatUtils.error("Error clicking in menu " + menu, t);
+						RemainUtils.error("Error clicking in menu " + menu, t);
 					}
 				}
 

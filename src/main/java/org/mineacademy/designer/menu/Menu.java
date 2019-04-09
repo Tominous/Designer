@@ -24,7 +24,7 @@ import org.mineacademy.designer.model.InventoryDrawer;
 import org.mineacademy.designer.model.UIClickLocation;
 import org.mineacademy.designer.util.InventoryAnimationUtil;
 import org.mineacademy.remain.Remain;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 import org.mineacademy.remain.util.OneTimeRunnable;
 import org.mineacademy.remain.util.ReflectionUtil;
 
@@ -282,7 +282,7 @@ public abstract class Menu {
 		}
 
 		// Call event after items have been set to allow to get them
-		if (!CompatUtils.callEvent(new MenuOpenEvent(this, player)))
+		if (!RemainUtils.callEvent(new MenuOpenEvent(this, player)))
 			return;
 
 		// Prevent menu in conversation
@@ -304,7 +304,7 @@ public abstract class Menu {
 		}
 
 		// Register current menu
-		CompatUtils.runDelayed(1, () -> {
+		RemainUtils.runDelayed(1, () -> {
 			inv.display(player);
 
 			player.setMetadata(TAG_CURRENT, new FixedMetadataValue(Remain.getPlugin(), Menu.this));

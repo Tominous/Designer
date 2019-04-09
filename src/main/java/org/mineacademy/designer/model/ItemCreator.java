@@ -22,7 +22,7 @@ import org.mineacademy.remain.model.CompMaterial;
 import org.mineacademy.remain.model.CompMonsterEgg;
 import org.mineacademy.remain.model.CompProperty;
 import org.mineacademy.remain.nbt.NBTItem;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 import org.mineacademy.remain.util.MinecraftVersion;
 import org.mineacademy.remain.util.MinecraftVersion.V;
 
@@ -239,7 +239,7 @@ public class ItemCreator {
 					t.printStackTrace();
 
 					// Probably version incompatible
-					CompatUtils.debug("The following item could not be transformed into " + entityRaw + " egg, item: " + is);
+					RemainUtils.debug("The following item could not be transformed into " + entityRaw + " egg, item: " + is);
 				}
 			}
 
@@ -250,7 +250,7 @@ public class ItemCreator {
 
 		final ItemMeta myMeta = meta != null ? meta.clone() : is.getItemMeta();
 
-		flags = new ArrayList<>(CompatUtils.getOrDefault(flags, new ArrayList<>()));
+		flags = new ArrayList<>(RemainUtils.getOrDefault(flags, new ArrayList<>()));
 
 		if (color != null && is.getType().toString().contains("LEATHER"))
 			((LeatherArmorMeta)myMeta).setColor(color.getDye().getColor());
@@ -269,12 +269,12 @@ public class ItemCreator {
 				myMeta.addEnchant(ench.getEnchant(), ench.getLevel(), true);
 
 		if (name != null)
-			myMeta.setDisplayName(CompatUtils.colorize("&r" + name));
+			myMeta.setDisplayName(RemainUtils.colorize("&r" + name));
 
 		if (lores != null) {
 			final List<String> coloredLore = new ArrayList<>();
 
-			lores.forEach( (line) -> coloredLore.add(CompatUtils.colorize("&7" + line)) );
+			lores.forEach( (line) -> coloredLore.add(RemainUtils.colorize("&7" + line)) );
 			myMeta.setLore(coloredLore);
 		}
 
@@ -295,7 +295,7 @@ public class ItemCreator {
 					flags.add(f);
 
 		try {
-			final List<org.bukkit.inventory.ItemFlag> f = CompatUtils.convert(flags, obj -> org.bukkit.inventory.ItemFlag.valueOf(obj.toString()));
+			final List<org.bukkit.inventory.ItemFlag> f = RemainUtils.convert(flags, obj -> org.bukkit.inventory.ItemFlag.valueOf(obj.toString()));
 
 			myMeta.addItemFlags( f.toArray( new org.bukkit.inventory.ItemFlag[ f.size() ] ) );
 		} catch (final Throwable t) {}

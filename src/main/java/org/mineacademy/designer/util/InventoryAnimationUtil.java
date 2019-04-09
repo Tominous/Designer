@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import org.mineacademy.designer.menu.Menu;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 import org.mineacademy.remain.util.MinecraftVersion;
 import org.mineacademy.remain.util.ReflectionUtil;
 import org.mineacademy.remain.util.MinecraftVersion.V;
@@ -69,7 +69,7 @@ public class InventoryAnimationUtil {
 		if (pending != null)
 			pending.cancel();
 
-		pending = CompatUtils.runDelayed(duration, () -> {
+		pending = RemainUtils.runDelayed(duration, () -> {
 			final Menu futureMenu = Menu.getMenu(player);
 
 			if (futureMenu != null && futureMenu.getClass().getName().equals(menu.getClass().getName()))
@@ -81,7 +81,7 @@ public class InventoryAnimationUtil {
 		tasks.put(uid, pending);
 
 		// Prevent overloading the map so remove the key afterwards
-		CompatUtils.runDelayed(duration + 1, () -> {
+		RemainUtils.runDelayed(duration + 1, () -> {
 			if (tasks.containsKey(uid))
 				tasks.remove(uid);
 		});

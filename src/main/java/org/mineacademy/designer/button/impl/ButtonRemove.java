@@ -12,7 +12,7 @@ import org.mineacademy.designer.model.ItemCreator;
 import org.mineacademy.remain.model.CompDye;
 import org.mineacademy.remain.model.CompItemFlag;
 import org.mineacademy.remain.model.CompMaterial;
-import org.mineacademy.remain.util.CompatUtils;
+import org.mineacademy.remain.util.RemainUtils;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -103,7 +103,7 @@ public final class ButtonRemove extends Button {
 			pl.closeInventory();
 			removeAction.remove(toRemoveName);
 
-			CompatUtils.tell(pl, "&2The " + (!toRemoveType.isEmpty() ? toRemoveType + " " : "") + toRemoveName + " has been deleted.");
+			RemainUtils.tell(pl, "&2The " + (!toRemoveType.isEmpty() ? toRemoveType + " " : "") + toRemoveName + " has been deleted.");
 		}
 	}
 
