@@ -22,9 +22,9 @@ import org.mineacademy.remain.model.CompMaterial;
 import org.mineacademy.remain.model.CompMonsterEgg;
 import org.mineacademy.remain.model.CompProperty;
 import org.mineacademy.remain.nbt.NBTItem;
-import org.mineacademy.remain.util.RemainUtils;
 import org.mineacademy.remain.util.MinecraftVersion;
 import org.mineacademy.remain.util.MinecraftVersion.V;
+import org.mineacademy.remain.util.RemainUtils;
 
 import lombok.Builder;
 import lombok.NonNull;
@@ -51,12 +51,14 @@ public class ItemCreator {
 	/**
 	 * The amount of the item
 	 */
-	@Builder.Default private final int amount = 1;
+	@Builder.Default
+	private final int amount = 1;
 
 	/**
 	 * The item damage
 	 */
-	@Builder.Default private final short damage = 0;
+	@Builder.Default
+	private final short damage = 0;
 
 	/**
 	 * The item name, colors are replaced
@@ -66,17 +68,20 @@ public class ItemCreator {
 	/**
 	 * The lore for this item, colors are replaced
 	 */
-	@Singular private final List<String> lores;
+	@Singular
+	private final List<String> lores;
 
 	/**
 	 * The enchants applied for the item
 	 */
-	@Singular private final List<UIEnchant> enchants;
+	@Singular
+	private final List<UIEnchant> enchants;
 
 	/**
 	 * The item flags
 	 */
-	@Singular private List<CompItemFlag> flags;
+	@Singular
+	private List<CompItemFlag> flags;
 
 	/**
 	 * Is the item unbreakable?
@@ -94,7 +99,8 @@ public class ItemCreator {
 	private final boolean hideTags;
 
 	/**
-	 * Should we add glow to the item? (adds a fake enchant and uses {@link ItemFlag} to hide it)
+	 * Should we add glow to the item? (adds a fake enchant and uses
+	 * {@link ItemFlag} to hide it)
 	 *
 	 * The enchant is visible on older MC versions.
 	 */
@@ -109,6 +115,7 @@ public class ItemCreator {
 	 * The internal NBT tag, permanent
 	 *
 	 * This will be stored at the key "Your plugin name + _Item"
+	 * 
 	 * @deprecated use with caution
 	 */
 	@Deprecated
@@ -155,7 +162,7 @@ public class ItemCreator {
 		ItemStack is = item != null ? item.clone() : null;
 
 		// Skip if air
-		if ((item != null && item.getType() == Material.AIR) || (material != null && material == CompMaterial.AIR))
+		if (item != null && item.getType() == Material.AIR || material != null && material == CompMaterial.AIR)
 			return new ItemStack(Material.AIR);
 
 		if (MinecraftVersion.atLeast(V.v1_13)) {
@@ -231,7 +238,6 @@ public class ItemCreator {
 				else if ("ZOMBIE_PIGMAN".equals(entityRaw))
 					entityRaw = "PIG_ZOMBIE";
 
-
 				try {
 					entity = EntityType.valueOf(entityRaw);
 
@@ -247,13 +253,12 @@ public class ItemCreator {
 				is = CompMonsterEgg.setEntity(is, entity);
 		}
 
-
 		final ItemMeta myMeta = meta != null ? meta.clone() : is.getItemMeta();
 
 		flags = new ArrayList<>(RemainUtils.getOrDefault(flags, new ArrayList<>()));
 
 		if (color != null && is.getType().toString().contains("LEATHER"))
-			((LeatherArmorMeta)myMeta).setColor(color.getDye().getColor());
+			((LeatherArmorMeta) myMeta).setColor(color.getDye().getColor());
 
 		if (skullOwner != null && myMeta instanceof SkullMeta)
 			((SkullMeta) myMeta).setOwner(skullOwner);
@@ -274,7 +279,7 @@ public class ItemCreator {
 		if (lores != null) {
 			final List<String> coloredLore = new ArrayList<>();
 
-			lores.forEach( (line) -> coloredLore.add(RemainUtils.colorize("&7" + line)) );
+			lores.forEach((line) -> coloredLore.add(RemainUtils.colorize("&7" + line)));
 			myMeta.setLore(coloredLore);
 		}
 
@@ -297,8 +302,9 @@ public class ItemCreator {
 		try {
 			final List<org.bukkit.inventory.ItemFlag> f = RemainUtils.convert(flags, obj -> org.bukkit.inventory.ItemFlag.valueOf(obj.toString()));
 
-			myMeta.addItemFlags( f.toArray( new org.bukkit.inventory.ItemFlag[ f.size() ] ) );
-		} catch (final Throwable t) {}
+			myMeta.addItemFlags(f.toArray(new org.bukkit.inventory.ItemFlag[f.size()]));
+		} catch (final Throwable t) {
+		}
 
 		is.setItemMeta(myMeta);
 
@@ -367,7 +373,8 @@ public class ItemCreator {
 	 * Get a new item creator from material
 	 *
 	 * @param material existing material
-	 * @deprecated use {@link #of(CompMaterial)} to ensure maximum cross-version compatibility
+	 * @deprecated use {@link #of(CompMaterial)} to ensure maximum cross-version
+	 *             compatibility
 	 * @return the new item creator
 	 */
 	@Deprecated
